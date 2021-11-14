@@ -1,0 +1,32 @@
+cost = {('s','1'):4,('s','2'):7,('s','3'):3,('1','2'):3,('1','4'):2,('2','t'):2,('3','4'):3,('4','t'):2}
+node = ['s','1','2','3','4','t']
+cost
+
+start = 's' 
+t = node.copy()
+s = []
+
+des = node.copy()
+des.remove(start)
+d = {start:0}
+for i in des:
+    d.update({i:9999})
+    
+p = {start:0}
+
+while len(s) < len(node):
+    temp = 99999
+    for o in t:
+        if d[o] < temp:
+            temp = d[o]
+            i = o
+    print('最小的是點:',i,'成本為:',d[i])
+    s.append(i)
+    print('s:',s)
+    t.remove(i)
+    print('t:',t)
+    for j,k in cost.keys():
+        if j == i:
+            if d[k] > d[j] + cost[j,k]:
+                d[k] = d[j] + cost[j,k]
+                p.update({k:i})
